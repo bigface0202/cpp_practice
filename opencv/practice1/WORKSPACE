@@ -1,0 +1,15 @@
+#
+# @file WORKSPACE
+#
+# @note WORKSPACE file for Bazel build
+# 
+# @author ssugino / created on 2021/06/30
+# @copyright 2021 GlobalWalkers.inc. All rights reserved.
+#
+workspace( name="gwrt" )
+
+load( "@gwrt//External/OpenCV:cv_configure.bzl", "cv_autoconf" )
+cv_autoconf( name = "cv" )
+
+# load( "@gwrt//External/GoogleTest:gtest_configure.bzl", "gtest_autoconf" )
+# gtest_autoconf( name = "gtest" )
