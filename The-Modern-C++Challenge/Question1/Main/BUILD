@@ -1,32 +1,34 @@
 #
 # @file BUILD
 # 
-# @author y-ksst / created on 2021/06/30
-# 
+# @author y-ksst / created on 2021/07/23
 #
 # load( "@cv//:cv_deploy.bzl", "cv_deploy" )
 load( "@gwrt//Main:gwrt.bzl", "gwrt_binary" )
 
-BIN_NAME = "Sample"
+BIN_NAME = "Answer"
 
 gwrt_binary(
     name = BIN_NAME,
-    srcs = [ "sample.cpp", ],
+    srcs = [ "answer.cpp", ],
     copts = [],
-    deps = [
-        # "//Main/VideoIO:VideoIO",
-    ],
+    deps = [],
 )
 
-# cv_deploy( 
-#     name="cv_deploy", 
+# ans_deploy( 
+#     name="ans_deploy", 
 #     src=BIN_NAME, 
 # )
 
-genrule(
-    name = "run",
-    # srcs = [ "cv_deploy" ],
-    outs = [ "run.sh" ],
-    cmd  = "echo $(SRCS) | sed \'s/ /\\n/g\' > $@",
-    executable = 1,
-)
+# genrule(
+#     name = "run",
+#     srcs = [ "ans_deploy" ],
+#     outs = [ "run.sh" ],
+#     cmd  = "echo $(SRCS) | sed \'s/ /\\n/g\' > $@",
+#     executable = 1,
+# )
+
+# cc_binary(
+#   name = BIN_NAME,
+#   srcs = ["answer.cpp"],
+# )

@@ -1,8 +1,7 @@
 #
 # @file BUILD
 # 
-# @author ssugino / created on 2021/06/30
-# @copyright 2021 GlobalWalkers.inc. All rights reserved.
+# @author y-ksst / created on 2021/07/23
 #
 load( "@cv//:cv_deploy.bzl", "cv_deploy" )
 load( "@gwrt//Main:gwrt.bzl", "gwrt_binary" )
