@@ -12,7 +12,10 @@ using namespace std;
 int main( int argc, char *argv[] )
 {
     int max;
-    int sum = 0;
+    // int sum = 0;
+    unsigned long long sum = 0;
+    // 大きな上限まで加算するためには、変数sumの型にintやlongではなく、long longを使うのがコツ
+    // そうでないと、ループカウンタが10,000になる前にオーバーフローする
     cout << "上限値:";
     cin >> max;
 

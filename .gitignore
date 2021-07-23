@@ -1,4 +1,2 @@
-/bazel-bin/
-/bazel-out/
-/bazel-*/
-/bazel-testlogs/
+The-Modern-C++Challenge/Question*/bazel-*
+Shin-Meikai-C++Nyumon/practice*/bazel-*
