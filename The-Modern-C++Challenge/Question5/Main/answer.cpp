@@ -1,5 +1,6 @@
 /**
  * @file answer.cpp
+ * セクシー素数
  * 
  * 
  * @author bigface / created on 2021/07/24
