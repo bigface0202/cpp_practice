@@ -21,15 +21,21 @@ bool validate_isbn_10(std::string_view isbn)
   auto valid = false;
   // isdigitで数列かどうかを判断できる
   // all_ofは範囲の全ての要素が条件を満たすか判定する
+  // isdigitはラムダ式にする必要がある
+  // @see https://teratail.com/questions/180778
   if (isbn.size() == 10 && 
-      std::all_of(std::begin(isbn), std::end(isbn), isdigit))
+      std::all_of(std::begin(isbn), std::end(isbn), [](char ch) { return isdigit(ch);}))
   {
     auto w = 10;
     // accumulateは範囲を集計する
+    // wは桁数に対するウェイト
     auto sum = std::accumulate(std::begin(isbn), std::end(isbn), 0, [&w](int const total, char const c) {
+      std::cout << "w:" << w << '\n';
+      std::cout << "c:" << c << '\n';
+      // '0'の文字コードを数字charから引く。例えば、'0'が0になる。'1'も1に。
       return total + w-- * (c - '0');
     });
-    valid = !(sum & 11);
+    valid = !(sum % 11);
   }
   return valid;
 }

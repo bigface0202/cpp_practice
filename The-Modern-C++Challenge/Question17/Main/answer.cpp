@@ -28,7 +28,7 @@ public:
   array2d() : arr(R * C) {}
   explicit array2d(std::initializer_list<T> l) : arr(l) {}
   constexpr T* data() noexcept { return arr.data(); }
-  // constexpr T const * data() const noexcept { return arr.data(); }
+  constexpr T const * data() const noexcept { return arr.data(); }
 
   constexpr T& at(size_t const r, size_t const c)
   {
@@ -36,20 +36,20 @@ public:
     return arr.at(r*C + c);
   }
 
-  // constexpr T const & at(size_t const r, size_t const c) const
-  // {
-  //   return arr.at(r*C + c);
-  // }
+  constexpr T const & at(size_t const r, size_t const c) const
+  {
+    return arr.at(r*C + c);
+  }
 
   constexpr T& operator() (size_t const r, size_t const c)
   {
     return arr[r*C + c];
   }
 
-  // constexpr T const & operator() (size_t const r, size_t const c) const
-  // {
-  //   return arr[r*C + c];
-  // }
+  constexpr T const & operator() (size_t const r, size_t const c) const
+  {
+    return arr[r*C + c];
+  }
 
   constexpr bool empty() noexcept { return R == 0 || C == 0; }
 
