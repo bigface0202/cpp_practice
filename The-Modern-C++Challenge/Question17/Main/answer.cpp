@@ -30,6 +30,11 @@ public:
   constexpr T* data() noexcept { return arr.data(); }
   constexpr T const * data() const noexcept { return arr.data(); }
 
+  /** 
+   * const有り・無しを定義しておくことで、
+   * constなarray2dとconstではないarray2dに対してatが使える
+   * T&とすることで右辺値に代入が行われることを禁じている
+  */
   constexpr T& at(size_t const r, size_t const c)
   {
     // 配列を2次元配置にせず、1次元配置とすることでメモリ消費を抑えることができる
@@ -41,6 +46,11 @@ public:
     return arr.at(r*C + c);
   }
 
+  /** 
+   * const有り・無しを定義しておくことで、
+   * constなarray2dとconstではないarray2dに対してoperator()が使える
+   * T&とすることで右辺値に代入が行われることを禁じている
+  */
   constexpr T& operator() (size_t const r, size_t const c)
   {
     return arr[r*C + c];
@@ -92,6 +102,8 @@ int main( int argc, char *argv[] )
   // スワップ
   a.swap(b);
 
-  // ムーブ
+  // ムーブ 左辺値を右辺値にキャストする
+  // コピーではなく、ポインタのすげ替えになる
+  // 但し、コピー元は破壊される(nullptr or コピー先のアドレスになっているかもしれない)
   array2d<int, 2, 3> c(std::move(b));
 }

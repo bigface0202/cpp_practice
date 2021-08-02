@@ -16,12 +16,16 @@ class ipv4 {
   std::array<unsigned char, 4> data;
 
 public:
-  // コンストラクタ
+  
+  // デフォルトコンストラクタ
   // コロンはコンストラクタ初期化子
   constexpr ipv4() : ipv4(0, 0, 0, 0) {}
+  // コンストラクタ
   constexpr ipv4(unsigned char const a, unsigned char const b,
                 unsigned char c, unsigned char d):
                 data{{a, b, c, d}} {}
+  // explicitを付けることで暗黙の型変換を防止する
+  // 意図しないものが型変換されてコンパイルが通るのはマズイ
   explicit constexpr ipv4(unsigned long a)
             :ipv4(static_cast<unsigned char>((a >> 24) & 0xFF),
                   static_cast<unsigned char>((a >> 16) & 0xFF),
@@ -80,7 +84,7 @@ int main()
   ipv4 address(168, 192, 0, 1);
   std::cout << address << std::endl;
 
-  ipv4 ip;
+  ipv4 ip(255);
   std::cout << ip << std::endl; // 初期値(0.0.0.0)が表示される
   std::cin >> ip;
   if (!std::cin.fail())
