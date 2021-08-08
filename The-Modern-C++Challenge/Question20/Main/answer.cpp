@@ -23,6 +23,8 @@ template<class C, class T>
 // ヘルパー関数（以下の関数全てに使われる関数）
 bool contains(C const & c, T const & value)
 {
+  // cのendに到達していたら、valueは含まれない
+  // != なのでendに到達していなかったら、valueは含まれるということになる
   return std::end(c) != std::find(std::begin(c), std::end(c), value);
 }
 
@@ -35,14 +37,14 @@ bool contains_any(C const & c, T &&... value)
 
 // 全て含まれる
 template<class C, class... T>
-bool contains_all(C const & c, T const &&... value)
+bool contains_all(C const & c, T &&... value)
 {
   return (... && contains(c, value));
 }
 
 // いずれも含まれない
 template<class C, class... T>
-bool contains_none(C const & c, T const &&... value)
+bool contains_none(C const & c, T &&... value)
 {
   // std::forwardは右辺値参照の場合は右辺値に、左辺値参照の場合は左辺値にキャストし直す
   return !contains_any(c, std::forward<T>(value)...);
@@ -63,10 +65,9 @@ int main( int argc, char *argv[] )
   else
     std::cout << "含まれません\n";
 
-  // std::list<int> l{ 1, 2, 3, 4, 5, 6};
-  // if (contains_none(l, 0, 6))
-  //   std::cout << "0, 6は含まれます\n";
-  // else
-  //   std::cout << "0, 6は含まれません\n";
-  std::cout << std::end(a);
+  std::list<int> l{ 1, 2, 3, 4, 5, 6};
+  if (contains_none(l, 0, 6))
+    std::cout << "0, 6は含まれます\n";
+  else
+    std::cout << "0, 6は含まれません\n";
 }
