@@ -19,6 +19,7 @@ std::string bytes_to_hexstr(Iter begin, Iter end, bool const uppercase = false)
 {
   // 文字列ストリームを使って、文字列へ書き込みを行う
   std::ostringstream oss;
+  // setfで書式を指定できる
   if (uppercase) oss.setf(std::ios_base::uppercase);
   for (; begin != end; ++begin) {
     // <<演算子でossにデータを流し込む
@@ -46,6 +47,10 @@ int main()
   std::cout << bytes_to_hexstr(input2) << std::endl;
   std::cout << bytes_to_hexstr(buf) << std::endl;
 
+  for (auto i : input1)
+  {
+    std::cout << std::uppercase << std::hex << std::setw(2) << std::setfill('0') << i;
+  }
   // std::vectorのみ以下の表現ができる
   // for (auto i : input1)
   // {
