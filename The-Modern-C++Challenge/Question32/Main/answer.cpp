@@ -25,6 +25,7 @@ void print_pascal_triangle(int const n)
     for (int j = 0; j <= i; j++)
     {
       auto y = x;
+      std::cout << i << ',' << j << std::endl;
       x = x * (i - j) / (j + 1);
       auto maxlen = number_of_digits(x) - 1;
       std::cout << y << std::string(n - 1 - maxlen - n % 2, ' ');
