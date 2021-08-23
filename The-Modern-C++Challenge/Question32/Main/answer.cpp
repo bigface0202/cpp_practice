@@ -26,6 +26,7 @@ void print_pascal_triangle(int const n)
     {
       auto y = x;
       std::cout << i << ',' << j << std::endl;
+      // 次の値は現在のxに現在のiと現在のjから計算される
       x = x * (i - j) / (j + 1);
       auto maxlen = number_of_digits(x) - 1;
       std::cout << y << std::string(n - 1 - maxlen - n % 2, ' ');
@@ -62,6 +63,7 @@ int main()
 //   return tmp1 / tmp2;
 // }
 
+// 再帰法使ったCombinationの計算
 // long long combi2(long long n, long long k)
 // {
 //   if (n == k || k == 0)
