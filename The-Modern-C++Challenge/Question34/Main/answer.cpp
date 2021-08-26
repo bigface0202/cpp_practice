@@ -27,6 +27,7 @@ void remove_empty_lines(fs::path filepath)
   std::ifstream filein(filepath.native(), std::ios::in);
   if (!filein.is_open())
     throw std::runtime_error("Failed to open file.");
+  // temp_directory_path()で一時ファイル用のディレクトリのパスを取得する
   auto temppath = fs::temp_directory_path() / "temp.txt";
   // std::ios::out 出力用にファイルを開く
   // std::ios::trunc 既存のファイルに上書きする
