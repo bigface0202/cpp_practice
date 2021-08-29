@@ -11,7 +11,7 @@ BIN_NAME = "Answer"
 gwrt_binary(
     name = BIN_NAME,
     srcs = [ "answer.cpp", ],
-    copts = ["-std=c++17"], # C++17を使う
+    copts = ["-std=c++17", "-lstdc++fs"], # C++17を使う
     deps = [],
 )
 
