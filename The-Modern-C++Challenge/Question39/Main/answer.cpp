@@ -20,6 +20,7 @@ template <typename Time = std::chrono::microseconds,
 struct perf_timer
 {
   template <typename F, typename... Args>
+  // 各オブジェクトに属しないメンバ関数の場合は、静的メンバ関数にしたほうがよい
   static Time duration(F&& f, Args... args)
   {
     auto start = Clock::now();
@@ -45,10 +46,11 @@ void g(int const /*a*/, int const /*b*/)
 
 int main()
 {
+  // 静的メンバ関数なので、このような呼び出し方になっている
   auto t1 = perf_timer<std::chrono::microseconds>::duration(f);
   auto t2 = perf_timer<std::chrono::milliseconds>::duration(g, 1, 2);
 
-  // durationに単位を渡すことで、その単位で表現してくれる
+  // durationに単位を渡すことで、その単位で表現してくれる（std::nanoでナノ単位）
   auto total = std::chrono::duration<double, std::nano>(t1 + t2).count();
 
   std::cout << total << std::endl;
