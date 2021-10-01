@@ -91,7 +91,8 @@ void print_buffer(double_buffer<T> const & buf)
 int main( int argc, char *argv[] )
 {
   double_buffer<int> buf(10);
-
+  
+  // 書き込み用のスレッド
   std::thread t([&buf]() {
     for (int i = 1; i < 1000; i += 10)
     {
@@ -105,6 +106,7 @@ int main( int argc, char *argv[] )
     }
   });
 
+  // 読み出し
   auto start = std::chrono::system_clock::now();
   do
   {
@@ -113,5 +115,6 @@ int main( int argc, char *argv[] )
     std::this_thread::sleep_for(150ms);
   } while (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - start).count() < 12);
   
+  // threadはjoinして終了
   t.join();
 }
