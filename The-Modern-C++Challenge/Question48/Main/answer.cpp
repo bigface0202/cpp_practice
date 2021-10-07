@@ -26,6 +26,8 @@ std::vector<std::pair<T, size_t>> find_most_frequent(std::vector<T> const & rang
   // デバッグで中身見ると確かにな、という感じ
   for (auto const & e : range) counts[e]++;
 
+  // std::max_elementで最大値を抽出
+  // e1.secondには頻出数が格納されている
   auto maxelem = std::max_element(
     std::cbegin(counts), std::cend(counts),
     [](auto const & e1, auto const & e2){
@@ -33,8 +35,13 @@ std::vector<std::pair<T, size_t>> find_most_frequent(std::vector<T> const & rang
     }
   );
 
+  // mapを格納するときはvectorの型にstd::pairを指定する
   std::vector<std::pair<T, size_t>> result;
 
+  // copy_ifは条件を満たす要素のみをコピー
+  // max_elementのみでは、一番最初に適合した数値のみを返すので、
+  // copy_ifで頻度が等しいものを全て抽出する
+  // なので、条件としてkvp.second == maxelem->secondになっている
   std::copy_if(
     std::cbegin(counts), std::cend(counts),
     std::back_inserter(result),
