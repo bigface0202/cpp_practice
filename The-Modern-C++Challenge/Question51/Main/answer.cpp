@@ -13,6 +13,31 @@
 /** 
  * 解答
 */
+// 再帰を使う方法
+void next_permutation_myself(std::string str, std::string perm)
+{
+  if (str.empty()) std::cout << perm << std::endl;
+  else {
+    for (size_t i = 0; i < str.size(); ++i) {
+      // substr(1)で1番目以降の全体からなる部分文字列を取得する
+      next_permutation_myself(str.substr(1), perm + str[0]);
+
+      // std::rotate(first, middle, last)
+      // middleの数だけ文字を左にローテートする
+      // 今回の場合は1文字だけ左に回転させる（0番目は最後にいく）
+      std::rotate(std::begin(str), std::begin(str) + 1, std::end(str));
+    }
+  }
+}
+
+void print_permutations_recursive(std::string str)
+{
+  next_permutation_myself(str, "");
+}
+
+
+// 再帰を使わない方法
+// 標準ライブラリのnext_permutationを使う
 void print_permutation(std::string str)
 {
   std::sort(std::begin(str), std::end(str));
@@ -26,8 +51,11 @@ void print_permutation(std::string str)
 int main(int argc, char *argv[])
 {
   std::string text = "yusuke";
+  std::string text_ = "kenta";
 
   print_permutation(text);
+
+  print_permutations_recursive(text_);
 }
 
 // 順列の意味を勘違いしていた、、、
